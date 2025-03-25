@@ -1,6 +1,6 @@
 package com.project.finance.core.services;
 
-import com.project.finance.core.dto.RegisterDTO;
+import com.project.finance.core.dto.AddRegisterDTO;
 import com.project.finance.core.ports.repository.RegisterRepository;
 
 public class RegisterService {
@@ -11,7 +11,9 @@ public class RegisterService {
         this.registerRepository = registerRepository;
     }
 
-    public void addRegister(RegisterDTO registerDTO) {
+    public void addRegister(AddRegisterDTO registerDTO) {
+
+        registerRepository.addRegister(registerDTO.spaceId(), registerDTO.register());
 
     }
 
