@@ -1,10 +1,14 @@
 package com.project.finance.core.services;
 
 import com.project.finance.core.dto.AddRegisterDTO;
+import com.project.finance.core.dto.GetRegistersDTO;
 import com.project.finance.core.exception.SpaceNotFound;
+import com.project.finance.core.model.Register;
 import com.project.finance.core.model.Space;
 import com.project.finance.core.ports.repository.RegisterRepository;
 import com.project.finance.core.ports.repository.SpaceRepository;
+
+import java.util.List;
 
 public class RegisterService {
 
@@ -17,11 +21,12 @@ public class RegisterService {
     }
 
     public void addRegister(AddRegisterDTO registerDTO) {
-
         Space space = spaceRepository.getSpaceById(registerDTO.spaceId()).orElseThrow(SpaceNotFound::new);
+        registerRepository.addRegister(space.id(), registerDTO.register());
+    }
 
-        registerRepository.addRegister(registerDTO.spaceId(), registerDTO.register());
-
+    public List<Register> getRegisters(GetRegistersDTO getRegistersDTO){
+        return registerRepository.getRegister(getRegistersDTO);
     }
 
 }
