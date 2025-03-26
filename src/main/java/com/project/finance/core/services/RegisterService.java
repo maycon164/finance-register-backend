@@ -7,9 +7,11 @@ import com.project.finance.core.model.Register;
 import com.project.finance.core.model.Space;
 import com.project.finance.core.ports.repository.RegisterRepository;
 import com.project.finance.core.ports.repository.SpaceRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RegisterService {
 
     private final RegisterRepository registerRepository;
