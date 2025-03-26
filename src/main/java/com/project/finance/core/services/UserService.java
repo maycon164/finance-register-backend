@@ -7,7 +7,9 @@ import com.project.finance.core.model.Space;
 import com.project.finance.core.model.User;
 import com.project.finance.core.ports.repository.SpaceRepository;
 import com.project.finance.core.ports.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserService {
 
     private UserRepository userRepository;
@@ -20,7 +22,6 @@ public class UserService {
         this.userRepository = userRepository;
         this.spaceRepository = spaceRepository;
     }
-
 
     public UserInfoDTO getUserInfo(String email) {
         Space space = spaceRepository.getSpaceByEmail(email).orElseThrow(SpaceNotFound::new);

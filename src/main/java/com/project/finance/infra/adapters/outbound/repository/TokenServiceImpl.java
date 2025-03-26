@@ -10,4 +10,9 @@ public class TokenServiceImpl implements TokenService {
     public String generateToken(User user) {
         return "";
     }
+
+    @Override
+    public User validateToken(String token) {
+        return null;
+    }
 }

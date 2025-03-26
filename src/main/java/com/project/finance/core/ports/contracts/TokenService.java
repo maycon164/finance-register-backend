@@ -5,4 +5,6 @@ import com.project.finance.core.model.User;
 public interface TokenService {
 
     String generateToken(User user);
+
+    User validateToken(String token);
 }
