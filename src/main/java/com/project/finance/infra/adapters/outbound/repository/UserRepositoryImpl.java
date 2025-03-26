@@ -2,15 +2,22 @@ package com.project.finance.infra.adapters.outbound.repository;
 
 import com.project.finance.core.model.User;
 import com.project.finance.core.ports.repository.UserRepository;
-import org.springframework.stereotype.Repository;
+import com.project.finance.infra.adapters.outbound.repository.jpa.repository.UserRepositoryJpa;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Repository
+@Component
 public class UserRepositoryImpl implements UserRepository {
+
+    private final UserRepositoryJpa userRepositoryJpa;
+
+    public UserRepositoryImpl(UserRepositoryJpa userRepositoryJpa) {
+        this.userRepositoryJpa = userRepositoryJpa;
+    }
 
     @Override
     public Optional<User> getUserByEmail(String email) {
-        return Optional.empty();
+        return Optional.of(userRepositoryJpa.findByEmail(email));
     }
 }
