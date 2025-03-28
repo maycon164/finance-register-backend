@@ -13,5 +13,5 @@ public interface UserRepositoryJpa extends JpaRepository<UserEntity, Long> {
             select u from UserEntity u
             where u.email = :email
             """)
-    User findByEmail(String email);
+    UserEntity findByEmail(String email);
 }

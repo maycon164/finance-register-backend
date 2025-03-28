@@ -1,4 +1,4 @@
-package com.project.finance.infra.adapters.inbound;
+package com.project.finance.infra.adapters.inbound.controllers;
 
 import com.project.finance.core.dto.LoginDTO;
 import com.project.finance.core.dto.TokenDTO;

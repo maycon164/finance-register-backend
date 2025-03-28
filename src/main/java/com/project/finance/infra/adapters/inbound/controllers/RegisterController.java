@@ -1,4 +1,4 @@
-package com.project.finance.infra.adapters.inbound;
+package com.project.finance.infra.adapters.inbound.controllers;
 
 import com.project.finance.core.dto.GetRegistersDTO;
 import com.project.finance.core.model.Register;

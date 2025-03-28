@@ -26,5 +26,5 @@ public class AuthService {
         User user = userRepository.getUserByEmail(loginDTO.email()).orElseThrow(UserNotFound::new);
         return new TokenDTO(tokenService.generateToken(user));
     }
-
+    
 }
