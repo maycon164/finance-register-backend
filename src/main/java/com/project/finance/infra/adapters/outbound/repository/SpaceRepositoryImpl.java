@@ -10,6 +10,7 @@ import com.project.finance.infra.adapters.outbound.repository.jpa.repository.Use
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -25,7 +26,7 @@ public class SpaceRepositoryImpl implements SpaceRepository {
 
     @Override
     public Optional<Space> getSpaceById(Long spaceId) {
-        return Optional.empty();
+        return spaceRepositoryJPA.findById(spaceId).map(this::toSpace);
     }
 
     @Override
@@ -46,5 +47,14 @@ public class SpaceRepositoryImpl implements SpaceRepository {
         space.setUser(user);
         space.setCreatedAt(LocalDate.now());
         return space;
+    }
+
+    private Space toSpace(SpaceEntity space) {
+        return new Space(
+                space.getId(),
+                space.getName(),
+                null,
+                List.of()
+        );
     }
 }

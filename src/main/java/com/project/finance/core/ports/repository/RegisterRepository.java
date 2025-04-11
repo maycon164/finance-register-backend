@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RegisterRepository {
 
-    void addRegister(Long spaceId, RegisterDTO registerDTO);
+    void addRegister(String email, Long spaceId, RegisterDTO registerDTO);
 
     List<Register> getRegister(GetRegistersDTO getRegistersDTO);
 }
