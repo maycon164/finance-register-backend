@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class TokenServiceImpl implements TokenService {
 
+    //TODO: add issuer in env variables
     private final static String jwtIssuer = "app";
+    //TODO: add secret in env variables
     private final static String jwtSecret = "secret";
     private final UserRepository userRepository;
 

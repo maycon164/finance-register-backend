@@ -1,6 +1,5 @@
 package com.project.finance.infra.adapters.outbound.repository.jpa.repository;
 
-import com.project.finance.core.model.User;
 import com.project.finance.infra.adapters.outbound.repository.jpa.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -4,6 +4,7 @@ import java.util.List;
 
 public record Space (
         Long id,
+        String name,
         User owner,
         List<User> members
 ){}

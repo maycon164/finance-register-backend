@@ -37,7 +37,7 @@ public class RegisterServiceTest {
     public void givenAddRegisterDTO_thenAdd() {
         RegisterDTO registerDTO = new RegisterDTO(100L, RegisterType.INCOME);
         AddRegisterDTO addRegisterDTO = new AddRegisterDTO(1L, registerDTO);
-        Space space = new Space(1L, null, List.of());
+        Space space = new Space(1L, "",null, List.of());
 
         Mockito.when(spaceRepository.getSpaceById(1L)).thenReturn(Optional.of(space));
 
@@ -53,7 +53,7 @@ public class RegisterServiceTest {
 
         Mockito.when(spaceRepository.getSpaceById(1L)).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(SpaceNotFound.class, () -> {
+        Assertions.assertThrows(SpaceNotFound.class, ()-> {
             registerService.addRegister(addRegisterDTO);
         });
     }
