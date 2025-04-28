@@ -3,6 +3,7 @@ package com.project.finance.infra.adapters.outbound.repository;
 import com.project.finance.core.dto.SpaceDTO;
 import com.project.finance.core.model.Space;
 import com.project.finance.core.ports.repository.SpaceRepository;
+import com.project.finance.infra.adapters.mapper.UserMapper;
 import com.project.finance.infra.adapters.outbound.repository.jpa.entity.SpaceEntity;
 import com.project.finance.infra.adapters.outbound.repository.jpa.entity.UserEntity;
 import com.project.finance.infra.adapters.outbound.repository.jpa.repository.SpaceRepositoryJPA;
@@ -53,7 +54,8 @@ public class SpaceRepositoryImpl implements SpaceRepository {
         return new Space(
                 space.getId(),
                 space.getName(),
-                null,
+                UserMapper.toUser(space.getUser()),
+                //todo: retrieve users in the same space
                 List.of()
         );
     }
