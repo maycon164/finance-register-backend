@@ -1,6 +1,7 @@
 package com.project.finance.core.services;
 
 import com.project.finance.core.dto.LoginDTO;
+import com.project.finance.core.dto.RegisterUserDTO;
 import com.project.finance.core.dto.TokenDTO;
 import com.project.finance.core.exception.UserNotFound;
 import com.project.finance.core.model.User;
@@ -26,5 +27,9 @@ public class AuthService {
         User user = userRepository.getUserByEmail(loginDTO.email()).orElseThrow(UserNotFound::new);
         return new TokenDTO(tokenService.generateToken(user));
     }
-    
+
+    public void createUser(RegisterUserDTO registerUserDTO) {
+        userRepository.addUser(registerUserDTO);
+    }
+
 }

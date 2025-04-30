@@ -1,6 +1,7 @@
 package com.project.finance.infra.adapters.inbound.controllers;
 
 import com.project.finance.core.dto.LoginDTO;
+import com.project.finance.core.dto.RegisterUserDTO;
 import com.project.finance.core.dto.TokenDTO;
 import com.project.finance.core.services.AuthService;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,11 @@ public class AuthController {
     @PostMapping("/login")
     public TokenDTO makeLogin(@RequestBody LoginDTO loginDTO) {
         return authService.login(loginDTO);
+    }
+
+    @PostMapping("/register")
+    public void registerUser(@RequestBody RegisterUserDTO registerUserDTO) {
+        authService.createUser(registerUserDTO);
     }
 
 }
