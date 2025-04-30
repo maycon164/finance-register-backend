@@ -3,3 +3,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/finance-register
     username: postgres
     password: 9090
+
+cors:
+  frontend: http://localhost:3000

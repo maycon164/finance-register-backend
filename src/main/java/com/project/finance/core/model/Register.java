@@ -6,5 +6,6 @@ public record Register (
         Long id,
         Long value,
         RegisterType type,
-        LocalDate createdAt
+        LocalDate createdAt,
+        User createdBy
 ) { }

@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface SpaceRepository {
 
-   Optional<Space> getSpaceById(Long spaceId);
-   Optional<Space> getSpaceByEmail(String email);
+   Optional<Space> findBySpaceId(Long spaceId);
+   Optional<Space> findByEmail(String email);
 
    void createSpace(String email, SpaceDTO spaceDTO);
 }

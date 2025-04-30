@@ -22,13 +22,15 @@ public class RegisterController {
 
     @GetMapping
     public List<Register> getRegisters(@ModelAttribute GetRegistersDTO getRegistersDTO) {
-        System.out.println(getRegistersDTO);
-        return registerService.getRegisters(getRegistersDTO);
+        return registerService.getRegisters(getUserLogged(), getRegistersDTO);
     }
 
     @PostMapping
     public void addRegister(@RequestBody AddRegisterDTO addRegisterDTO) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        registerService.addRegister(user, addRegisterDTO);
+        registerService.addRegister(getUserLogged(), addRegisterDTO);
+    }
+
+    private User getUserLogged() {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

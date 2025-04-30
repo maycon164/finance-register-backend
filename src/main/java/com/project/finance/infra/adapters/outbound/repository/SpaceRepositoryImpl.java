@@ -26,13 +26,13 @@ public class SpaceRepositoryImpl implements SpaceRepository {
     }
 
     @Override
-    public Optional<Space> getSpaceById(Long spaceId) {
+    public Optional<Space> findBySpaceId(Long spaceId) {
         return spaceRepositoryJPA.findById(spaceId).map(this::toSpace);
     }
 
     @Override
-    public Optional<Space> getSpaceByEmail(String email) {
-        return Optional.empty();
+    public Optional<Space> findByEmail(String email) {
+        return this.spaceRepositoryJPA.findByEmail(email).stream().findFirst().map(this::toSpace);
     }
 
     @Override

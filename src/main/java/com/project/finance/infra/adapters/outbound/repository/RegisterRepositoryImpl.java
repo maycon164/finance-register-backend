@@ -7,6 +7,7 @@ import com.project.finance.core.model.Register;
 import com.project.finance.core.ports.repository.RegisterRepository;
 import com.project.finance.core.ports.repository.SpaceRepository;
 import com.project.finance.core.ports.repository.UserRepository;
+import com.project.finance.infra.adapters.mapper.UserMapper;
 import com.project.finance.infra.adapters.outbound.repository.jpa.entity.RegisterEntity;
 import com.project.finance.infra.adapters.outbound.repository.jpa.entity.SpaceEntity;
 import com.project.finance.infra.adapters.outbound.repository.jpa.entity.UserEntity;
@@ -51,7 +52,7 @@ public class RegisterRepositoryImpl implements RegisterRepository {
 
     @Override
     public List<Register> getRegister(GetRegistersDTO getRegistersDTO) {
-        return List.of();
+        return registerRepositoryJPA.findBySpaceId(getRegistersDTO.spaceId()).stream().map(this::toRegister).toList();
     }
 
     private RegisterEntity toRegisterEntity(RegisterDTO registerDTO) {
@@ -61,6 +62,16 @@ public class RegisterRepositoryImpl implements RegisterRepository {
         registerEntity.setRegisterDate(registerDTO.registerDate());
         registerEntity.setAmount(registerDTO.value());
         return registerEntity;
+    }
+
+    private Register toRegister(RegisterEntity registerEntity) {
+        return new Register(
+                registerEntity.getId(),
+                registerEntity.getAmount(),
+                registerEntity.getType(),
+                registerEntity.getRegisterDate(),
+                UserMapper.toUser(registerEntity.getUser())
+        );
     }
 
 }

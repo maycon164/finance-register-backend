@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -27,13 +28,21 @@ public class RegisterService {
     }
 
     public void addRegister(User user, AddRegisterDTO registerDTO) {
-        Space space = spaceRepository.getSpaceById(registerDTO.spaceId()).orElseThrow(SpaceNotFound::new);
+        Space space = spaceRepository.findBySpaceId(registerDTO.spaceId()).orElseThrow(SpaceNotFound::new);
         log.info("Adding new register to {} at {}", user.email(), LocalDate.now());
         registerRepository.addRegister(user.email(), space.id(), registerDTO.register());
     }
 
-    public List<Register> getRegisters(GetRegistersDTO getRegistersDTO){
-        return registerRepository.getRegister(getRegistersDTO);
+    public List<Register> getRegisters(User user, GetRegistersDTO getRegistersDTO){
+        return registerRepository.getRegister(getDefaultSpaceId(user, getRegistersDTO));
+    }
+
+    //TODO: getDefaultSpaceId when user dont send spaceId in DTO; remove
+    private GetRegistersDTO getDefaultSpaceId(User user, GetRegistersDTO getRegistersDTO) {;
+        return getRegistersDTO.withSpaceId(getDefaultSpace(user).id());
+    }
+    private Space getDefaultSpace(User user) {
+        return this.spaceRepository.findByEmail(user.email()).orElseThrow(() -> new RuntimeException("Default Space not Found"));
     }
 
 }

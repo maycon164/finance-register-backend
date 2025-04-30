@@ -24,7 +24,7 @@ public class UserService {
     }
 
     public UserInfoDTO getUserInfo(String email) {
-        Space space = spaceRepository.getSpaceByEmail(email).orElseThrow(SpaceNotFound::new);
+        Space space = spaceRepository.findByEmail(email).orElseThrow(SpaceNotFound::new);
         User user = userRepository.getUserByEmail(email).orElseThrow(UserNotFound::new);
         return new UserInfoDTO(user, space);
     }

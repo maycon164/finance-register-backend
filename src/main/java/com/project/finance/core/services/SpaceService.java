@@ -21,7 +21,7 @@ public class SpaceService {
 
     public void ensureDefaultUserSpace(User user) {
         log.info("Verifying if user {} has a space", user.email());
-        Optional<Space> optionalSpace = spaceRepository.getSpaceByEmail(user.email());
+        Optional<Space> optionalSpace = spaceRepository.findByEmail(user.email());
 
         if(optionalSpace.isEmpty()) {
             log.info("User does not have a space, creating default space to {}", user.email());
