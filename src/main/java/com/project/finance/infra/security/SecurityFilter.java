@@ -22,12 +22,18 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     TokenService tokenService;
 
-    @Autowired
-    UserRepository userRepository;
+    List<String> routes = List.of(
+            "/auth"
+    );
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        var token = this.recoverToken(request);
+        if(!routes.stream().filter(route -> request.getRequestURI().contains(route)).toList().isEmpty()) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String token = this.recoverToken(request);
 
         if(token != null){
             User user = tokenService.validateToken(token);
