@@ -52,7 +52,9 @@ public class RegisterRepositoryImpl implements RegisterRepository {
 
     @Override
     public List<Register> getRegister(GetRegistersDTO getRegistersDTO) {
-        return registerRepositoryJPA.findBySpaceId(getRegistersDTO.spaceId()).stream().map(this::toRegister).toList();
+        return registerRepositoryJPA.findBySpaceId(getRegistersDTO.spaceId()).stream()
+                .filter(registerEntity -> registerEntity.getRegisterDate().equals(getRegistersDTO.day()))
+                .map(this::toRegister).toList();
     }
 
     private RegisterEntity toRegisterEntity(RegisterDTO registerDTO) {
