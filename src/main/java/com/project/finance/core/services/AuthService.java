@@ -14,17 +14,21 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final TokenService tokenService;
+    private final SpaceService spaceService;
 
     public AuthService(
             UserRepository userRepository,
-            TokenService tokenService
+            TokenService tokenService,
+            SpaceService spaceService
     ) {
         this.userRepository = userRepository;
         this.tokenService = tokenService;
+        this.spaceService = spaceService;
     }
 
     public TokenDTO login(LoginDTO loginDTO) {
         User user = userRepository.getUserByEmail(loginDTO.email()).orElseThrow(UserNotFound::new);
+        spaceService.ensureDefaultUserSpace(user);
         return new TokenDTO(tokenService.generateToken(user));
     }
 
